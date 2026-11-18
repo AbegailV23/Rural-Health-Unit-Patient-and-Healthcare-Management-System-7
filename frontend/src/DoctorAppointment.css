@@ -1,0 +1,106 @@
+
+/* DOCTOR APPOINTMENT - BLUE & WHITE THEME */
+
+.doctor-appointment-page {
+    min-height: 100vh;
+    padding: 35px 5%;
+    background: linear-gradient(135deg, #f8fbff, #edf4ff);
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* HEADER */
+
+.doctor-appointment-header {
+    padding: 40px;
+    margin-bottom: 30px;
+    color: white;
+    border-radius: 20px;
+    background: linear-gradient(
+        110deg,
+        #1049a5,
+        #1765df,
+        #3889ed
+    );
+    box-shadow: 0 12px 30px rgba(23, 101, 223, 0.15);
+}
+
+.doctor-appointment-header h1 {
+    margin-bottom: 10px;
+    font: 800 30px Manrope, sans-serif;
+}
+
+.doctor-appointment-header p {
+    color: #dceaff;
+    font-size: 14px;
+}
+
+/* APPOINTMENT LIST */
+
+.doctor-appointment-list {
+    padding: 28px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+}
+
+.doctor-appointment-list h2 {
+    margin-bottom: 22px;
+    color: #172b49;
+    font: 800 21px Manrope, sans-serif;
+}
+
+/* APPOINTMENT RECORDS */
+
+.appointment-table-container > div {
+    padding: 23px;
+    margin-bottom: 15px;
+    background: #f8fbff;
+    border: 1px solid #e5edf6;
+    border-radius: 15px;
+    transition: 0.25s ease;
+}
+
+.appointment-table-container > div:hover {
+    border-color: #c5d9f7;
+    box-shadow: 0 8px 20px rgba(23, 101, 223, 0.09);
+    transform: translateY(-3px);
+}
+
+.doctor-appointment-list p {
+    margin-bottom: 11px;
+    color: #647792;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* EMPTY RECORDS */
+
+.doctor-appointment-list > p {
+    padding: 30px;
+    color: #8795a8;
+    text-align: center;
+    background: #f8fbff;
+    border: 1px dashed #d7e3f1;
+    border-radius: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+    .doctor-appointment-page {
+        padding: 18px 14px;
+    }
+
+    .doctor-appointment-header {
+        padding: 27px 23px;
+    }
+
+    .doctor-appointment-header h1 {
+        font-size: 24px;
+    }
+
+    .doctor-appointment-list {
+        padding: 20px;
+    }
+}
