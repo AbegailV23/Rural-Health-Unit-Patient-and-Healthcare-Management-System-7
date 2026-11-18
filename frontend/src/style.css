@@ -1,0 +1,462 @@
+/* =========================================
+   MEDICINE INVENTORY MANAGEMENT
+   Modern Blue & White Healthcare Theme
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+    --primary: #1765df;
+    --primary-dark: #1049a5;
+    --light-blue: #edf5ff;
+    --text: #172b49;
+    --muted: #7d8da4;
+    --border: #e2eaf4;
+    --white: #ffffff;
+    --background: #f3f7fd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+/* =========================================
+   MAIN DASHBOARD
+========================================= */
+
+.pharmacist-dashboard {
+    min-height: 100vh;
+    padding: 35px 5%;
+    background: linear-gradient(135deg, #f8fbff, #edf4ff);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.medicine-header {
+    position: relative;
+    overflow: hidden;
+    padding: 40px;
+    margin-bottom: 30px;
+    color: white;
+    border-radius: 20px;
+    background: linear-gradient(
+        110deg,
+        #1049a5,
+        #1765df,
+        #3889ed
+    );
+    box-shadow: 0 12px 30px rgba(23, 101, 223, 0.15);
+}
+
+.medicine-header::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -60px;
+    top: -100px;
+    border: 1px solid #ffffff35;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 35px #ffffff10,
+        0 0 0 70px #ffffff08;
+}
+
+.medicine-header h1 {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 10px;
+    font: 800 32px Manrope, sans-serif;
+    letter-spacing: -1px;
+}
+
+.medicine-header p {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    color: #dceaff;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   CONTENT LAYOUT
+========================================= */
+
+.pharmacist-content {
+    display: grid;
+    grid-template-columns: 350px minmax(0, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+/* =========================================
+   FORM AND LIST CONTAINERS
+========================================= */
+
+.medicine-form,
+.medicine-list {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+}
+
+.medicine-form h2,
+.medicine-list h2 {
+    margin-bottom: 22px;
+    color: var(--text);
+    font: 800 21px Manrope, sans-serif;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.medicine-form label {
+    display: block;
+    margin: 16px 0 8px;
+    color: #536783;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.medicine-form input,
+.medicine-form select,
+.medicine-form textarea {
+    width: 100%;
+    padding: 13px 14px;
+    color: #203450;
+    background: #ffffff;
+    border: 1px solid #dfe7f1;
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.medicine-form input::placeholder,
+.medicine-form textarea::placeholder {
+    color: #a8b3c2;
+}
+
+.medicine-form input:focus,
+.medicine-form select:focus,
+.medicine-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(23, 101, 223, 0.10);
+}
+
+.medicine-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* =========================================
+   FORM BUTTON
+========================================= */
+
+.medicine-form button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
+    color: white;
+    background: linear-gradient(135deg, #1765df, #2879ed);
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 15px rgba(23, 101, 223, 0.18);
+    transition: 0.25s ease;
+}
+
+.medicine-form button:hover {
+    background: linear-gradient(135deg, #1049a5, #1765df);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(23, 101, 223, 0.25);
+}
+
+.medicine-form button:active {
+    transform: scale(0.98);
+}
+
+/* =========================================
+   MEDICINE GRID
+========================================= */
+
+.medicine-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* =========================================
+   MEDICINE CARD
+========================================= */
+
+.medicine-card {
+    position: relative;
+    padding: 23px;
+    background: white;
+    border: 1px solid #e5edf6;
+    border-radius: 15px;
+    transition: 0.25s ease;
+}
+
+.medicine-card:hover {
+    transform: translateY(-4px);
+    border-color: #c5d9f7;
+    box-shadow: 0 12px 28px rgba(23, 101, 223, 0.09);
+}
+
+.medicine-card h3 {
+    margin-bottom: 15px;
+    color: #1765df;
+    font: 800 17px Manrope, sans-serif;
+    overflow-wrap: anywhere;
+}
+
+.medicine-card p {
+    margin-bottom: 11px;
+    color: #647792;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.medicine-card p strong {
+    color: #344b68;
+}
+
+/* =========================================
+   MEDICINE ACTIONS
+========================================= */
+
+.medicine-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #edf1f7;
+}
+
+.medicine-actions button {
+    flex: 1;
+    padding: 10px 13px;
+    color: white;
+    background: #1765df;
+    border: none;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.medicine-actions button:hover {
+    background: #1049a5;
+    transform: translateY(-1px);
+}
+
+.medicine-actions .delete-button {
+    background: #fff1f0;
+    color: #c23b35;
+    border: 1px solid #ffd5d1;
+}
+
+.medicine-actions .delete-button:hover {
+    background: #c74747;
+    color: white;
+    border-color: #c74747;
+}
+
+/* =========================================
+   STOCK STATUS
+========================================= */
+
+.stock-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.available {
+    color: #167547;
+    background: #e8f8ef;
+}
+
+.low-stock {
+    color: #946200;
+    background: #fff4d6;
+}
+
+.out-of-stock {
+    color: #b42318;
+    background: #ffe9e8;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-medicines {
+    grid-column: 1 / -1;
+    padding: 45px 20px;
+    color: #8795a8;
+    text-align: center;
+    background: #f8fbff;
+    border: 1px dashed #d7e3f1;
+    border-radius: 12px;
+}
+
+.empty-medicines h3 {
+    margin-bottom: 8px;
+    color: #536783;
+    font-size: 16px;
+}
+
+.empty-medicines p {
+    font-size: 12px;
+}
+
+/* FONT SIZE ONLY */
+
+.medicine-header h1 {
+  font-size: 30px;
+}
+
+.medicine-header p {
+  font-size: 14px;
+}
+
+.medicine-form h2,
+.medicine-list h2 {
+  font-size: 20px;
+}
+
+.medicine-form label {
+  font-size: 13px;
+}
+
+.medicine-form input,
+.medicine-form select,
+.medicine-form textarea {
+  font-size: 14px;
+}
+
+.medicine-form input::placeholder,
+.medicine-form textarea::placeholder {
+  font-size: 13px;
+}
+
+.medicine-form button {
+  font-size: 14px;
+}
+
+.medicine-card h3 {
+  font-size: 17px;
+}
+
+.medicine-card p {
+  font-size: 13px;
+}
+
+.stock-status {
+  font-size: 12px;
+}
+
+.medicine-actions button {
+  font-size: 12px;
+}
+
+.empty-medicine h3 {
+  font-size: 18px;
+}
+
+.empty-medicine p {
+  font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+    .pharmacist-content {
+        grid-template-columns: 300px minmax(0, 1fr);
+    }
+
+    .medicine-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+    .pharmacist-content {
+        grid-template-columns: 1fr;
+    }
+
+    .medicine-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .pharmacist-dashboard {
+        padding: 18px 14px;
+    }
+
+    .medicine-header {
+        padding: 27px 23px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+    }
+
+    .medicine-header h1 {
+        font-size: 24px;
+    }
+
+    .medicine-header p {
+        font-size: 12px;
+    }
+
+    .medicine-form,
+    .medicine-list {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .medicine-form h2,
+    .medicine-list h2 {
+        font-size: 18px;
+    }
+
+    .medicine-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medicine-card {
+        padding: 18px;
+    }
+
+    .medicine-actions button {
+        padding: 10px 8px;
+    }
+}

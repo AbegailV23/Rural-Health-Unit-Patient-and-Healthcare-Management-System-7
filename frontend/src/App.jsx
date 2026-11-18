@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React from "react";
+import PharmacistDashboard from "./pages/PharmacistDashboard.jsx";
+import "./style.css";
 
 function App() {
-
-  return (
-    <>
-      
-    </>
-  )
+    return (
+        <div>
+            <PharmacistDashboard />
+        </div>
+    );
 }
 
-export default App
+export default App;
