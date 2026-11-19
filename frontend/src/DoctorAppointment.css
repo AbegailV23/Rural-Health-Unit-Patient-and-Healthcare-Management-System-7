@@ -104,3 +104,96 @@
         padding: 20px;
     }
 }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .doctor-appointment-page {
+        padding: 18px 14px;
+    }
+
+    .doctor-appointment-header {
+        padding: 27px 23px;
+    }
+
+    .doctor-appointment-header h1 {
+        font-size: 24px;
+    }
+
+    .doctor-appointment-list {
+        padding: 20px;
+    }
+}
+
+
+/* APPOINTMENT DATE FILTER */
+
+.appointment-date-filter {
+    padding: 22px 28px;
+    margin-bottom: 25px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 15px;
+}
+
+.appointment-date-filter label {
+    margin-right: 15px;
+    color: #172b49;
+    font-weight: bold;
+}
+
+.appointment-date-filter input {
+    padding: 10px 15px;
+    border: 1px solid #c5d9f7;
+    border-radius: 8px;
+}
+
+.appointment-date-filter button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    color: white;
+    background: #1765df;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* APPOINTMENT HEADING */
+
+.appointment-heading {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 15px;
+    background-color: #1765df;
+    border-radius: 10px;
+}
+
+.appointment-heading p {
+    color: white;
+    font-weight: bold;
+}
+
+/* APPOINTMENT ITEM */
+
+.appointment-item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px 15px;
+    margin-top: 10px;
+    background-color: #f8fbff;
+    border: 1px solid #e5edf6;
+    border-radius: 12px;
+}
+
+.appointment-item p {
+    color: #647792;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .appointment-heading,
+    .appointment-item {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}

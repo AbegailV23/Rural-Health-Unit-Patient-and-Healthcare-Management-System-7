@@ -3,6 +3,7 @@ import PharmacistDashboard from "./pages/PharmacistDashboard.jsx";
 import DoctorAppointmentPage from "./pages/DoctorAppointmentPage.jsx";
 import "./style.css";
 
+
 function App() {
     return (
         <div>

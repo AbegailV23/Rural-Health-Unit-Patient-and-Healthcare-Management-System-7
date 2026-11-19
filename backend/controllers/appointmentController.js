@@ -5,8 +5,12 @@ export const fetchAllAppointments = async (req, res) => {
 
     try {
 
+        // Get selected date from URL
+        const selectedDate = req.query.date;
+
+
         const appointments =
-            await appointmentService.fetchAllAppointments();
+            await appointmentService.fetchAllAppointments(selectedDate);
 
         res.status(200).json(appointments);
 
