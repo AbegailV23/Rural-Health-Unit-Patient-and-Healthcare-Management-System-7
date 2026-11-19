@@ -4,8 +4,16 @@ import db from "../config/db.js";
 // 1. RETRIEVE ALL DOCTOR AVAILABILITY
 export const getAllAvailability = async () => {
     const [rows] = await db.query(
-        `SELECT * FROM doctor_availability
-         ORDER BY available_date, start_time`
+        `SELECT
+            id,
+            doctor_name,
+            available_date,
+            start_time,
+            end_time,
+            status,
+            created_at
+         FROM doctor_availability
+         ORDER BY available_date ASC, start_time ASC`
     );
 
     return rows;

@@ -77,7 +77,7 @@ const DoctorAvailability = () => {
                 end_time: ""
             });
 
-            fetchAvailability();
+            await fetchAvailability();
 
         } catch (error) {
             setMessage(error.message);
@@ -87,7 +87,9 @@ const DoctorAvailability = () => {
     // UPDATE STATUS
     const handleStatusChange = async (item) => {
         const newStatus =
-            item.status === "Available" ? "Unavailable" : "Available";
+            item.status === "Available"
+                ? "Unavailable"
+                : "Available";
 
         try {
             const response = await fetch(
@@ -114,7 +116,8 @@ const DoctorAvailability = () => {
             }
 
             setMessage(data.message);
-            fetchAvailability();
+
+            await fetchAvailability();
 
         } catch (error) {
             setMessage(error.message);
@@ -128,6 +131,7 @@ const DoctorAvailability = () => {
 
             <p>{message}</p>
 
+            {/* ADD DOCTOR AVAILABILITY */}
             <form onSubmit={handleSubmit}>
 
                 <label>Doctor Name</label>
@@ -146,6 +150,7 @@ const DoctorAvailability = () => {
                     name="available_date"
                     value={formData.available_date}
                     onChange={handleChange}
+                    min={new Date().toISOString().split("T")[0]}
                     required
                 />
 
@@ -173,29 +178,96 @@ const DoctorAvailability = () => {
 
             </form>
 
+            {/* AVAILABLE SCHEDULES */}
             <h3>Available Schedules</h3>
 
-            {availability.length > 0 ? (
-                availability.map((item) => (
-                    <div key={item.id} className="availability-card">
+            {availability.filter(
+                (item) => item.status === "Available"
+            ).length > 0 ? (
 
-                        <p>Doctor Name: {item.doctor_name}</p>
-                        <p>Date: {String(item.available_date).slice(0, 10)}</p>
-                        <p>Start Time: {String(item.start_time).slice(0, 5)}</p>
-                        <p>End Time: {String(item.end_time).slice(0, 5)}</p>
-                        <p>Status: {item.status}</p>
+                availability
+                    .filter((item) => item.status === "Available")
+                    .map((item) => (
 
-                        <button
-                            type="button"
-                            onClick={() => handleStatusChange(item)}
+                        <div
+                            key={item.id}
+                            className="availability-card"
                         >
-                            Change Status
-                        </button>
 
-                    </div>
-                ))
+                            <p>Doctor Name: {item.doctor_name}</p>
+
+                            <p>
+                                Date: {String(item.available_date).slice(0, 10)}
+                            </p>
+
+                            <p>
+                                Start Time: {String(item.start_time).slice(0, 5)}
+                            </p>
+
+                            <p>
+                                End Time: {String(item.end_time).slice(0, 5)}
+                            </p>
+
+                            <p>Status: {item.status}</p>
+
+                            <button
+                                type="button"
+                                onClick={() => handleStatusChange(item)}
+                            >
+                                Change to Unavailable
+                            </button>
+
+                        </div>
+                    ))
+
             ) : (
                 <p>No available schedules found.</p>
+            )}
+
+            {/* UNAVAILABLE SCHEDULES */}
+            <h3>Unavailable Schedules</h3>
+
+            {availability.filter(
+                (item) => item.status === "Unavailable"
+            ).length > 0 ? (
+
+                availability
+                    .filter((item) => item.status === "Unavailable")
+                    .map((item) => (
+
+                        <div
+                            key={item.id}
+                            className="availability-card"
+                        >
+
+                            <p>Doctor Name: {item.doctor_name}</p>
+
+                            <p>
+                                Date: {String(item.available_date).slice(0, 10)}
+                            </p>
+
+                            <p>
+                                Start Time: {String(item.start_time).slice(0, 5)}
+                            </p>
+
+                            <p>
+                                End Time: {String(item.end_time).slice(0, 5)}
+                            </p>
+
+                            <p>Status: {item.status}</p>
+
+                            <button
+                                type="button"
+                                onClick={() => handleStatusChange(item)}
+                            >
+                                Change to Available
+                            </button>
+
+                        </div>
+                    ))
+
+            ) : (
+                <p>No unavailable schedules found.</p>
             )}
 
         </div>
