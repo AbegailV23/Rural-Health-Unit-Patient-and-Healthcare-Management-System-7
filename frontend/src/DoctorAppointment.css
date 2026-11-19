@@ -197,3 +197,162 @@
         gap: 10px;
     }
 }
+
+
+/*DOCTOR AVAILABILITY */
+
+.availability-container {
+    min-height: 100vh;
+    padding: 35px 5%;
+    background: linear-gradient(135deg, #f8fbff, #edf4ff);
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* AVAILABILITY HEADER */
+
+.availability-container h2 {
+    padding: 35px;
+    margin-bottom: 25px;
+    color: white;
+    font: 800 28px Manrope, sans-serif;
+    background: linear-gradient(110deg, #1049a5, #1765df, #3889ed);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(23, 101, 223, 0.15);
+}
+
+/* AVAILABILITY FORM */
+
+.availability-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+}
+
+.availability-container label {
+    color: #172b49;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.availability-container input {
+    padding: 12px 14px;
+    color: #172b49;
+    background: #f8fbff;
+    border: 1px solid #c5d9f7;
+    border-radius: 8px;
+    outline: none;
+}
+
+.availability-container input:focus {
+    border-color: #1765df;
+    box-shadow: 0 0 0 3px rgba(23, 101, 223, 0.10);
+}
+
+/* SAVE BUTTON */
+
+.availability-container form button {
+    padding: 12px;
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    background: #1765df;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.availability-container form button:hover {
+    background: #1049a5;
+}
+
+/* AVAILABLE SCHEDULES */
+
+.availability-container h3 {
+    margin: 30px 0 20px;
+    color: #172b49;
+    font: 800 21px Manrope, sans-serif;
+}
+
+/* AVAILABILITY CARD */
+
+.availability-card {
+    padding: 23px;
+    margin-bottom: 15px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+    transition: 0.25s ease;
+}
+
+.availability-card:hover {
+    border-color: #c5d9f7;
+    box-shadow: 0 8px 20px rgba(23, 101, 223, 0.09);
+    transform: translateY(-3px);
+}
+
+.availability-card p {
+    margin-bottom: 10px;
+    color: #647792;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* CHANGE STATUS BUTTON */
+
+.availability-card button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    color: white;
+    background: #1765df;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.availability-card button:hover {
+    background: #1049a5;
+}
+
+/* MESSAGE */
+
+.availability-container > p {
+    color: #1765df;
+    font-size: 14px;
+}
+
+/* EMPTY SCHEDULE */
+
+.availability-container > p:empty {
+    display: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+    .availability-container {
+        padding: 18px 14px;
+    }
+
+    .availability-container h2 {
+        padding: 27px 23px;
+        font-size: 24px;
+    }
+
+    .availability-container form {
+        padding: 20px;
+    }
+
+    .availability-card {
+        padding: 18px;
+    }
+}
+
+
