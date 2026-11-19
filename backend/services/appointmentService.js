@@ -1,10 +1,11 @@
 
 import * as appointmentModel from '../models/appointmentModel.js';
 
-export const fetchAllAppointments = async () => {
+// Fetch and organize appointments
+export const fetchAllAppointments = async (selectedDate) => {
 
     const appointments =
-        await appointmentModel.fetchAllAppointments();
+        await appointmentModel.fetchAllAppointments(selectedDate);
 
     return appointments;
 };
