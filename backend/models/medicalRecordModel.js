@@ -114,3 +114,41 @@ export const updateMedicalRecord = async (id, data) => {
 
     return result.affectedRows;
 };
+
+// FUNCTION 6: Maghanap ng patient gamit ang ID o pangalan
+export const searchPatients = async (keyword) => {
+    const sql = `
+        SELECT
+            patient_id,
+            first_name,
+            middle_name,
+            last_name,
+            birth_date,
+            gender,
+            address,
+            contact_number
+        FROM patient
+        WHERE
+            CAST(patient_id AS CHAR) LIKE ?
+            OR first_name LIKE ?
+            OR middle_name LIKE ?
+            OR last_name LIKE ?
+            OR CONCAT(first_name, ' ', last_name) LIKE ?
+            OR CONCAT(first_name, ' ', middle_name, ' ', last_name) LIKE ?
+        ORDER BY last_name ASC
+        LIMIT 20
+    `;
+
+    const searchValue = `%${keyword}%`;
+
+    const [rows] = await db.query(sql, [
+        searchValue,
+        searchValue,
+        searchValue,
+        searchValue,
+        searchValue,
+        searchValue
+    ]);
+
+    return rows;
+};

@@ -51,3 +51,12 @@ export const editMedicalRecord = async (id, data) => {
 
     return "Medical record updated successfully";
 };
+
+// FUNCTION: Search patient
+export const searchPatientRecords = async (keyword) => {
+    if (!keyword || !keyword.trim()) {
+        throw new Error("Please enter a patient name or ID.");
+    }
+
+    return await medicalRecordModel.searchPatients(keyword.trim());
+};

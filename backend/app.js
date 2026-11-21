@@ -14,6 +14,7 @@ app.use("/medicine", medicineRoutes);
 app.use("/appointment", appointmentRoutes);
 app.use("/availability", doctorAvailabilityRoutes);
 app.use("/medical-records", medicalRecordRoutes);
+app.use("/medical-records", medicalRecordRoutes);
 
 app.get("/", (req, res) => {
     res.send("Municipal Health Center API is running.");
