@@ -4,6 +4,9 @@ import * as medicalRecordController from "../controllers/medicalRecordController
 
 const router = express.Router();
 
+// Search patients
+router.get("/search", medicalRecordController.searchPatients);
+
 // Kunin lahat ng medical records
 router.get("/all", medicalRecordController.getAllRecords);
 
@@ -15,5 +18,7 @@ router.post("/add", medicalRecordController.addRecord);
 
 // I-update ang medical record
 router.put("/update/:id", medicalRecordController.updateRecord);
+
+
 
 export default router;

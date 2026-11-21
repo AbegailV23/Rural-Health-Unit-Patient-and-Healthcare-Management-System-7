@@ -34,6 +34,22 @@ function NurseMedicalRecordsPage() {
     // State para sa success at error messages
     const [message, setMessage] = useState("");
 
+    // ==========================================
+// 2.1.2 VIEW AND UPDATE MEDICAL RECORDS
+// ==========================================
+
+// State para sa Patient ID na ise-search
+const [searchPatientId, setSearchPatientId] = useState("");
+
+// State para sa search results
+const [searchResults, setSearchResults] = useState([]);
+
+// State para malaman kung nakapag-search na
+const [hasSearched, setHasSearched] = useState(false);
+
+// State para malaman kung nagse-search pa
+const [isSearching, setIsSearching] = useState(false);
+
     // Kunin ang lahat ng medical records mula sa backend
     const fetchRecords = async () => {
         try {
@@ -56,6 +72,68 @@ function NurseMedicalRecordsPage() {
     useEffect(() => {
         fetchRecords();
     }, []);
+
+    // ==========================================
+// 2.1.2 SEARCH PATIENT MEDICAL RECORDS
+// ==========================================
+
+const handleSearchPatient = async (e) => {
+    e.preventDefault();
+
+    // Check kung may inilagay na Patient ID
+    if (!searchPatientId.trim()) {
+        setMessage("Please enter Patient ID.");
+        return;
+    }
+
+    try {
+        setIsSearching(true);
+        setMessage("");
+
+        // Kunin ang medical records gamit ang Patient ID
+        const response = await fetch(
+            `${API_URL}/patient/${searchPatientId}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Failed to retrieve medical records."
+            );
+        }
+
+        // I-store ang search results
+        setSearchResults(Array.isArray(data) ? data : []);
+
+        // Markahan na nakapag-search na
+        setHasSearched(true);
+
+        // Magpakita ng resulta
+        setMessage(
+            data.length === 0
+                ? "No medical records found."
+                : `${data.length} medical record(s) found.`
+        );
+
+    } catch (error) {
+        setMessage(error.message);
+        setSearchResults([]);
+        setHasSearched(true);
+
+    } finally {
+        setIsSearching(false);
+    }
+};
+
+
+// Clear Search Function
+const handleClearSearch = () => {
+    setSearchPatientId("");
+    setSearchResults([]);
+    setHasSearched(false);
+    setMessage("");
+};
 
     // Kunin ang changes sa form inputs
     const handleChange = (e) => {
@@ -171,6 +249,42 @@ function NurseMedicalRecordsPage() {
 
             {/* Header */}
             <NurseMedicalRecordsHeader />
+            {/* ==================================
+    2.1.2 SEARCH PATIENT MEDICAL RECORDS
+================================== */}
+
+<div className="medical-search-container">
+
+    <h3>Search Patient Medical Records</h3>
+
+    <form onSubmit={handleSearchPatient}>
+
+        {/* Patient ID Input */}
+        <input
+            type="number"
+            placeholder="Enter Patient ID"
+            value={searchPatientId}
+            onChange={(e) => setSearchPatientId(e.target.value)}
+            min="1"
+            required
+        />
+
+        {/* Search Button */}
+        <button type="submit" disabled={isSearching}>
+            {isSearching ? "Searching..." : "Search"}
+        </button>
+
+        {/* Clear Search Button */}
+        <button
+            type="button"
+            onClick={handleClearSearch}
+        >
+            Clear Search
+        </button>
+
+    </form>
+
+</div>
 
             {/* Success or Error Message */}
             {message && (
@@ -190,11 +304,15 @@ function NurseMedicalRecordsPage() {
                 clearForm={clearForm}
             />
 
-            {/* Medical Records List */}
+            {/* 2.1.2 VIEW MEDICAL RECORDS */}
             <NurseMedicalRecordsList
-                records={records}
-                handleEdit={handleEdit}
-            />
+            // Ipakita ang search results kung nag-search
+           // Kung hindi, ipakita ang lahat ng medical records
+             records={hasSearched ? searchResults : records}
+
+         // Function para mag-edit ng existing record
+             handleEdit={handleEdit}
+          />
 
         </div>
     );
