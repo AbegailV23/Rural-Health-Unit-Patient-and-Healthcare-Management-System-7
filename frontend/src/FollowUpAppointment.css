@@ -1,0 +1,269 @@
+
+/* MAIN CONTAINER */
+
+.follow-up-page {
+    min-height: 100vh;
+    padding: 35px 5%;
+    background: linear-gradient(135deg, #f8fbff, #edf4ff);
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* HEADER */
+
+.follow-up-header {
+    padding: 35px;
+    margin-bottom: 25px;
+    color: white;
+    background: linear-gradient(
+        110deg,
+        #1049a5,
+        #1765df,
+        #3889ed
+    );
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(23, 101, 223, 0.15);
+}
+
+.follow-up-header h2 {
+    margin-bottom: 8px;
+    color: white;
+    font: 800 28px Manrope, sans-serif;
+}
+
+.follow-up-header p {
+    color: #e8f1ff;
+    font-size: 14px;
+}
+
+/* MESSAGE */
+
+.follow-up-message {
+    color: #1765df;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* FORM CONTAINER */
+
+.follow-up-form-container {
+    padding: 28px;
+    margin-bottom: 30px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+}
+
+/* FORM HEADING */
+
+.follow-up-form-container h3 {
+    margin-bottom: 22px;
+    color: #172b49;
+    font: 800 21px Manrope, sans-serif;
+}
+
+/* INPUT GROUP */
+
+.follow-up-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 17px;
+}
+
+/* LABEL */
+
+.follow-up-input-group label {
+    color: #172b49;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* INPUT AND TEXTAREA */
+
+.follow-up-input-group input,
+.follow-up-input-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    color: #172b49;
+    background: #f8fbff;
+    border: 1px solid #c5d9f7;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* TEXTAREA */
+
+.follow-up-input-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+/* INPUT FOCUS */
+
+.follow-up-input-group input:focus,
+.follow-up-input-group textarea:focus {
+    border-color: #1765df;
+    box-shadow: 0 0 0 3px rgba(23, 101, 223, 0.10);
+}
+
+/* BUTTON CONTAINER */
+
+.follow-up-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* BUTTONS */
+
+.follow-up-save-btn,
+.follow-up-clear-btn,
+.follow-up-edit-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+/* SAVE BUTTON */
+
+.follow-up-save-btn {
+    color: white;
+    background: #1765df;
+}
+
+.follow-up-save-btn:hover {
+    background: #1049a5;
+}
+
+/* CLEAR BUTTON */
+
+.follow-up-clear-btn {
+    color: #172b49;
+    background: #e5edf8;
+}
+
+.follow-up-clear-btn:hover {
+    background: #d1def0;
+}
+
+/* APPOINTMENT LIST */
+
+.follow-up-list {
+    padding: 28px;
+    background: white;
+    border: 1px solid #e2eaf4;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(30, 65, 115, 0.05);
+}
+
+/* LIST HEADING */
+
+.follow-up-list h3 {
+    margin-bottom: 22px;
+    color: #172b49;
+    font: 800 21px Manrope, sans-serif;
+}
+
+/* APPOINTMENT CARD */
+
+.follow-up-card {
+    padding: 23px;
+    margin-bottom: 15px;
+    background: #f8fbff;
+    border: 1px solid #e5edf6;
+    border-radius: 15px;
+    transition: 0.25s ease;
+}
+
+/* CARD HOVER */
+
+.follow-up-card:hover {
+    border-color: #c5d9f7;
+    box-shadow: 0 8px 20px rgba(23, 101, 223, 0.09);
+    transform: translateY(-3px);
+}
+
+/* CARD HEADING */
+
+.follow-up-card h4 {
+    margin-bottom: 15px;
+    color: #1765df;
+    font: 800 17px Manrope, sans-serif;
+}
+
+/* APPOINTMENT INFORMATION */
+
+.follow-up-card p {
+    margin-bottom: 11px;
+    color: #647792;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* EDIT BUTTON */
+
+.follow-up-edit-btn {
+    margin-top: 10px;
+    color: white;
+    background: #1765df;
+}
+
+.follow-up-edit-btn:hover {
+    background: #1049a5;
+}
+
+/* EMPTY APPOINTMENTS */
+
+.follow-up-list > p {
+    padding: 30px;
+    color: #8795a8;
+    text-align: center;
+    background: #f8fbff;
+    border: 1px dashed #d7e3f1;
+    border-radius: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .follow-up-page {
+        padding: 18px 14px;
+    }
+
+    .follow-up-header {
+        padding: 27px 23px;
+    }
+
+    .follow-up-header h2 {
+        font-size: 24px;
+    }
+
+    .follow-up-form-container {
+        padding: 20px;
+    }
+
+    .follow-up-list {
+        padding: 20px;
+    }
+
+    .follow-up-card {
+        padding: 18px;
+    }
+
+    .follow-up-buttons {
+        flex-direction: column;
+    }
+
+    .follow-up-buttons button {
+        width: 100%;
+    }
+}
