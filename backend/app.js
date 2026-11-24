@@ -5,6 +5,7 @@ import appointmentRoutes from "./routes/appointmentRoutes.js";
 import doctorAvailabilityRoutes from "./routes/doctorAvailabilityRoutes.js";
 import medicalRecordRoutes from "./routes/medicalRecordRoutes.js";
 import followUpAppointmentRoutes from "./routes/followUpAppointmentRoutes.js";
+import patientRoutes from './routes/patientRoutes.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/appointment", appointmentRoutes);
 app.use("/availability", doctorAvailabilityRoutes);
 app.use("/medical-records", medicalRecordRoutes);
 app.use("/follow-up-appointments", followUpAppointmentRoutes);
+app.use('/patient', patientRoutes);
 
 app.get("/", (req, res) => {
     res.send("Municipal Health Center API is running.");
