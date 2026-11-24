@@ -49,6 +49,50 @@ export const getAppointmentsService = async () => {
     return await getAllAppointments();
 };
 
+// GET DAILY APPOINTMENTS
+// Inaayos ang appointments ayon sa scheduled date.
+export const getDailyAppointmentsService = async () => {
+
+    // Kinukuha ang lahat ng appointments.
+    const appointments = await getAllAppointments();
+
+    // Lalagyan ng appointments na magkakapareho ang date.
+    const dailySchedules = {};
+
+    appointments.forEach((appointment) => {
+
+        // Kinukuha ang scheduled date.
+        const date = String(appointment.scheduled_date).slice(0, 10);
+
+        // Gumagawa ng group para sa date kung wala pa ito.
+        if (!dailySchedules[date]) {
+            dailySchedules[date] = [];
+        }
+
+        // Inilalagay ang appointment sa tamang date.
+        dailySchedules[date].push(appointment);
+    });
+
+    // Lalagyan ng daily appointment information.
+    const dailyData = [];
+
+    // Kinukuha ang total patients at available slots bawat araw.
+    for (const date in dailySchedules) {
+
+        const total = dailySchedules[date].length;
+
+        dailyData.push({
+            scheduled_date: date,
+            total_patients: total,
+            available_slots: Math.max(0, DAILY_LIMIT - total),
+            is_full: total >= DAILY_LIMIT,
+            appointments: dailySchedules[date]
+        });
+    }
+
+    return dailyData;
+};
+
 // ADD APPOINTMENT
 // Nagdadagdag ng appointment pagkatapos ng validation.
 export const addAppointmentService = async (data) => {

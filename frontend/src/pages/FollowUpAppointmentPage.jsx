@@ -13,7 +13,7 @@ const API_URL = "http://localhost:3000/follow-up-appointments";
 function FollowUpAppointmentPage() {
 
     // Stores all appointments from the database.
-    const [appointments, setAppointments] = useState([]);
+    const [dailySchedules, setDailySchedules] = useState([]);
 
     // Stores the form input values.
     const [formData, setFormData] = useState({
@@ -33,11 +33,11 @@ function FollowUpAppointmentPage() {
     // Gets all appointments from the backend.
     const fetchAppointments = async () => {
         try {
-            const response = await fetch(`${API_URL}/all`);
+            const response = await fetch(`${API_URL}/daily`);
             const result = await response.json();
 
             if (result.success) {
-                setAppointments(result.data);
+                setDailySchedules(result.data);
             }
 
         } catch (error) {
@@ -143,7 +143,7 @@ function FollowUpAppointmentPage() {
             />
 
             <FollowUpAppointmentList
-                appointments={appointments}
+                dailySchedules={dailySchedules}
                 handleEdit={handleEdit}
             />
 

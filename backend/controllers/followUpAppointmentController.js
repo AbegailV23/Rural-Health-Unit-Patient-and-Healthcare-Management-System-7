@@ -1,6 +1,7 @@
 
 import {
     getAppointmentsService,
+    getDailyAppointmentsService,
     addAppointmentService,
     updateAppointmentService
 } from "../services/followUpAppointmentService.js";
@@ -56,6 +57,26 @@ export const updateFollowUpAppointment = async (req, res) => {
 
     } catch (error) {
         res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+// GET DAILY APPOINTMENTS
+// Ipinapakita ang appointments ayon sa scheduled date.
+export const getDailyFollowUpAppointments = async (req, res) => {
+    try {
+        // Kinukuha ang daily appointment schedules.
+        const dailySchedules = await getDailyAppointmentsService();
+
+        res.status(200).json({
+            success: true,
+            data: dailySchedules
+        });
+
+    } catch (error) {
+        res.status(500).json({
             success: false,
             message: error.message
         });
