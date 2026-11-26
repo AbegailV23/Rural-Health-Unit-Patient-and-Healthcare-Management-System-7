@@ -1,10 +1,10 @@
-
 import * as doctorAvailability from "../models/doctorAvailability.js";
 
 // VALIDATE DATE AND TIME
-const validateSchedule = (data) => {
+const validateSchedule = (data, requireService = true) => {
     const {
         doctor_name,
+        service_id,
         available_date,
         start_time,
         end_time
@@ -13,6 +13,11 @@ const validateSchedule = (data) => {
     // CHECK REQUIRED FIELDS
     if (!doctor_name || !available_date || !start_time || !end_time) {
         throw new Error("All fields are required.");
+    }
+
+    // CHECK HEALTH SERVICE
+    if (requireService && !service_id) {
+        throw new Error("Please select a health service.");
     }
 
     // VALIDATE DATE FORMAT
@@ -61,6 +66,16 @@ export const fetchAvailability = async () => {
     return await doctorAvailability.getAllAvailability();
 };
 
+// GET ALL DOCTORS
+export const fetchDoctors = async () => {
+    return await doctorAvailability.getAllDoctors();
+};
+
+// GET ALL HEALTH SERVICES
+export const fetchHealthServices = async () => {
+    return await doctorAvailability.getAllHealthServices();
+};
+
 // CREATE AVAILABILITY
 export const createAvailability = async (data) => {
     validateSchedule(data);
@@ -87,7 +102,8 @@ export const editAvailability = async (id, data) => {
         throw new Error("Availability record not found.");
     }
 
-    validateSchedule(data);
+    // Existing schedules may not have a service_id yet.
+    validateSchedule(data, false);
 
     if (!["Available", "Unavailable"].includes(data.status)) {
         throw new Error("Invalid availability status.");

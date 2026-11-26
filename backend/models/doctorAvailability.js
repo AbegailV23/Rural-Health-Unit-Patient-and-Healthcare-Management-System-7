@@ -1,25 +1,50 @@
-
 import db from "../config/db.js";
 
-// 1. RETRIEVE ALL DOCTOR AVAILABILITY
-export const getAllAvailability = async () => {
+// GET ALL DOCTORS
+export const getAllDoctors = async () => {
     const [rows] = await db.query(
-        `SELECT
-            id,
-            doctor_name,
-            available_date,
-            start_time,
-            end_time,
-            status,
-            created_at
-         FROM doctor_availability
-         ORDER BY available_date ASC, start_time ASC`
+        `SELECT doctor_id, doctor_name
+         FROM doctor
+         ORDER BY doctor_name ASC`
     );
 
     return rows;
 };
 
-// 2. RETRIEVE DOCTOR AVAILABILITY BY ID
+// GET ALL HEALTH SERVICES
+export const getAllHealthServices = async () => {
+    const [rows] = await db.query(
+        `SELECT service_id, service_name
+         FROM health_service
+         ORDER BY service_name ASC`
+    );
+
+    return rows;
+};
+
+// GET ALL DOCTOR AVAILABILITY
+export const getAllAvailability = async () => {
+    const [rows] = await db.query(
+        `SELECT
+            da.id,
+            da.doctor_name,
+            da.service_id,
+            hs.service_name,
+            da.available_date,
+            da.start_time,
+            da.end_time,
+            da.status,
+            da.created_at
+         FROM doctor_availability da
+         LEFT JOIN health_service hs
+         ON da.service_id = hs.service_id
+         ORDER BY da.available_date ASC, da.start_time ASC`
+    );
+
+    return rows;
+};
+
+// GET AVAILABILITY BY ID
 export const getAvailabilityById = async (id) => {
     const [rows] = await db.query(
         `SELECT * FROM doctor_availability
@@ -30,7 +55,7 @@ export const getAvailabilityById = async (id) => {
     return rows[0];
 };
 
-// 3. CHECK CONFLICTING SCHEDULE
+// CHECK CONFLICTING SCHEDULE
 export const checkConflict = async (
     doctor_name,
     available_date,
@@ -58,10 +83,11 @@ export const checkConflict = async (
     return rows.length > 0;
 };
 
-// 4. CREATE DOCTOR AVAILABILITY
+// ADD DOCTOR AVAILABILITY
 export const addAvailability = async (data) => {
     const {
         doctor_name,
+        service_id,
         available_date,
         start_time,
         end_time
@@ -69,10 +95,11 @@ export const addAvailability = async (data) => {
 
     const [result] = await db.query(
         `INSERT INTO doctor_availability
-        (doctor_name, available_date, start_time, end_time)
-        VALUES (?, ?, ?, ?)`,
+        (doctor_name, service_id, available_date, start_time, end_time)
+        VALUES (?, ?, ?, ?, ?)`,
         [
             doctor_name,
+            service_id,
             available_date,
             start_time,
             end_time
@@ -82,10 +109,11 @@ export const addAvailability = async (data) => {
     return result;
 };
 
-// 5. UPDATE DOCTOR AVAILABILITY
+// UPDATE DOCTOR AVAILABILITY
 export const updateAvailability = async (id, data) => {
     const {
         doctor_name,
+        service_id,
         available_date,
         start_time,
         end_time,
@@ -95,6 +123,7 @@ export const updateAvailability = async (id, data) => {
     const [result] = await db.query(
         `UPDATE doctor_availability
          SET doctor_name = ?,
+             service_id = ?,
              available_date = ?,
              start_time = ?,
              end_time = ?,
@@ -102,6 +131,7 @@ export const updateAvailability = async (id, data) => {
          WHERE id = ?`,
         [
             doctor_name,
+            service_id,
             available_date,
             start_time,
             end_time,
