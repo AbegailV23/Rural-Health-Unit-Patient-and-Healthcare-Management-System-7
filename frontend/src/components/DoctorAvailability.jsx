@@ -1,14 +1,17 @@
-
 import React, { useEffect, useState } from "react";
 import "../DoctorAppointment.css";
 
 const DoctorAvailability = () => {
+
     const API_URL = "http://localhost:3000/availability";
 
     const [availability, setAvailability] = useState([]);
+    const [doctors, setDoctors] = useState([]);
+    const [healthServices, setHealthServices] = useState([]);
 
     const [formData, setFormData] = useState({
         doctor_name: "",
+        service_id: "",
         available_date: "",
         start_time: "",
         end_time: ""
@@ -27,13 +30,51 @@ const DoctorAvailability = () => {
             }
 
             setAvailability(data);
+
         } catch (error) {
             setMessage(error.message);
         }
     };
 
+    // GET ALL DOCTORS
+    const fetchDoctors = async () => {
+        try {
+            const response = await fetch(`${API_URL}/doctors`);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message);
+            }
+
+            setDoctors(data);
+
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
+
+    // GET ALL HEALTH SERVICES
+    const fetchHealthServices = async () => {
+        try {
+            const response = await fetch(`${API_URL}/health-services`);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message);
+            }
+
+            setHealthServices(data);
+
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
+
+    // LOAD DATA
     useEffect(() => {
         fetchAvailability();
+        fetchDoctors();
+        fetchHealthServices();
     }, []);
 
     // HANDLE INPUT
@@ -57,6 +98,7 @@ const DoctorAvailability = () => {
                 },
                 body: JSON.stringify({
                     ...formData,
+                    service_id: Number(formData.service_id),
                     start_time: formData.start_time + ":00",
                     end_time: formData.end_time + ":00"
                 })
@@ -72,6 +114,7 @@ const DoctorAvailability = () => {
 
             setFormData({
                 doctor_name: "",
+                service_id: "",
                 available_date: "",
                 start_time: "",
                 end_time: ""
@@ -86,6 +129,7 @@ const DoctorAvailability = () => {
 
     // UPDATE STATUS
     const handleStatusChange = async (item) => {
+
         const newStatus =
             item.status === "Available"
                 ? "Unavailable"
@@ -101,6 +145,7 @@ const DoctorAvailability = () => {
                     },
                     body: JSON.stringify({
                         doctor_name: item.doctor_name,
+                        service_id: item.service_id,
                         available_date: String(item.available_date).slice(0, 10),
                         start_time: String(item.start_time).slice(0, 8),
                         end_time: String(item.end_time).slice(0, 8),
@@ -134,17 +179,50 @@ const DoctorAvailability = () => {
             {/* ADD DOCTOR AVAILABILITY */}
             <form onSubmit={handleSubmit}>
 
+                {/* DOCTOR DROPDOWN */}
                 <label>Doctor Name</label>
-                <input
-                    type="text"
+
+                <select
                     name="doctor_name"
                     value={formData.doctor_name}
                     onChange={handleChange}
-                    placeholder="Enter doctor name"
                     required
-                />
+                >
+                    <option value="">Select Doctor</option>
+
+                    {doctors.map((doctor) => (
+                        <option
+                            key={doctor.doctor_id}
+                            value={doctor.doctor_name}
+                        >
+                            {doctor.doctor_name}
+                        </option>
+                    ))}
+                </select>
+
+                {/* HEALTH SERVICE DROPDOWN */}
+                <label>Health Service</label>
+
+                <select
+                    name="service_id"
+                    value={formData.service_id}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">Select Health Service</option>
+
+                    {healthServices.map((service) => (
+                        <option
+                            key={service.service_id}
+                            value={service.service_id}
+                        >
+                            {service.service_name}
+                        </option>
+                    ))}
+                </select>
 
                 <label>Available Date</label>
+
                 <input
                     type="date"
                     name="available_date"
@@ -155,6 +233,7 @@ const DoctorAvailability = () => {
                 />
 
                 <label>Start Time</label>
+
                 <input
                     type="time"
                     name="start_time"
@@ -164,6 +243,7 @@ const DoctorAvailability = () => {
                 />
 
                 <label>End Time</label>
+
                 <input
                     type="time"
                     name="end_time"
@@ -195,6 +275,10 @@ const DoctorAvailability = () => {
                         >
 
                             <p>Doctor Name: {item.doctor_name}</p>
+
+                            <p>
+                                Health Service: {item.service_name || "Not assigned"}
+                            </p>
 
                             <p>
                                 Date: {String(item.available_date).slice(0, 10)}
@@ -241,6 +325,10 @@ const DoctorAvailability = () => {
                         >
 
                             <p>Doctor Name: {item.doctor_name}</p>
+
+                            <p>
+                                Health Service: {item.service_name || "Not assigned"}
+                            </p>
 
                             <p>
                                 Date: {String(item.available_date).slice(0, 10)}
